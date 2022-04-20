@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'org.jetbrains.kotlin.plugin.serialization'
+
 }
 
 android {
@@ -49,4 +51,7 @@ dependencies {
 
     // Libraria para mostar imágenes
     implementation 'com.squareup.picasso:picasso:2.71828'
+    // Librería para serializar nombres
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2"
+
 }
