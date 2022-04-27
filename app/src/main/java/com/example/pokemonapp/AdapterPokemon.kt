@@ -10,7 +10,7 @@ class AdapterPokemon : RecyclerView.Adapter<AdapterPokemon.PokemonViewHolder>() 
 
     class PokemonViewHolder(val pokemonBinding: ItemPokemonBinding) : RecyclerView.ViewHolder(pokemonBinding.root)
 
-    var pokemons = ListaPokemon()
+    private var pokemons = ListaPokemon()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder {
         val pokemonBinding = ItemPokemonBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -24,5 +24,10 @@ class AdapterPokemon : RecyclerView.Adapter<AdapterPokemon.PokemonViewHolder>() 
 
     override fun getItemCount(): Int {
         return pokemons.listaPokemon.size
+    }
+
+    fun actualizarLista(listaPokemon: ListaPokemon) {
+        pokemons = listaPokemon
+        notifyDataSetChanged()
     }
 }

@@ -29,7 +29,7 @@ data class Pokemon (
     @SerializedName("location_area_encounters")
     val locationAreaEncounters: String,
 
-    val moves: List<Move>,
+    //val moves: List<Move>,
     val name: String,
     val order: Long,
 

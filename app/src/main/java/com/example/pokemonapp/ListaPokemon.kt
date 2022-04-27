@@ -1,9 +1,16 @@
 package com.example.pokemonapp
 
+import com.google.gson.Gson
+
 
 class ListaPokemon(var listaPokemon : MutableList<Pokemon> = mutableListOf()) {
 
-
+    companion object {
+        fun fromJson(json: String):ListaPokemon {
+            val gson = Gson()
+            return gson.fromJson(json, ListaPokemon::class.java)
+        }
+    }
 
     fun agregar(pokemon: Pokemon) {
         listaPokemon.add(pokemon)
@@ -41,5 +48,10 @@ class ListaPokemon(var listaPokemon : MutableList<Pokemon> = mutableListOf()) {
         }
 
         return ListaPokemon(listaFiltrada.toMutableList())
+    }
+
+    fun toJson(): String{
+        val gson = Gson()
+        return gson.toJson(this)
     }
 }

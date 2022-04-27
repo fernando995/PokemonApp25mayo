@@ -2,5 +2,6 @@
 <resources>
     <string name="app_name">PokemonApp</string>
     <string name="descargar_pokemons">Descargar Pokemons!</string>
+    <string name="recargar_pokemons">Recargar Pokemons!</string>
     <string name="pokemon_picture">Foto del Pokemon</string>
 </resources>
