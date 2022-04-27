@@ -33,11 +33,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initBotonDescarga() {
-        binding.bDescarga.text = if (listaPokemon.listaPokemon.isNullOrEmpty()) {
+        binding.bDescarga.contentDescription = if (listaPokemon.listaPokemon.isNullOrEmpty()) {
             getString(R.string.descargar_pokemons)
         } else {
             getString(R.string.recargar_pokemons)
         }
+
+        if (listaPokemon.listaPokemon.isNullOrEmpty()) {
+            binding.bDescarga.setImageResource(R.mipmap.ic_descarga)
+        } else {
+            binding.bDescarga.setImageResource(R.mipmap.ic_recarga)
+        }
+
 
         binding.bDescarga.setOnClickListener {
             lifecycleScope.launch(Dispatchers.IO) {
@@ -45,6 +52,7 @@ class MainActivity : AppCompatActivity() {
                 withContext(Dispatchers.Main) {
                     actualizarAdapter(listaPokemon)
                 }
+                initBotonDescarga()
                 writeInPreferences()
 
 
