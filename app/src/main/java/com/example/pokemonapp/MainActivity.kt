@@ -2,6 +2,7 @@ package com.example.pokemonapp
 
 import android.content.Context
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -47,17 +48,23 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.bDescarga.setOnClickListener {
+            loadingVisible(true)
             lifecycleScope.launch(Dispatchers.IO) {
                 listaPokemon = ObtenerPokemonRequest.get()
                 withContext(Dispatchers.Main) {
                     actualizarAdapter(listaPokemon)
+                    initBotonDescarga()
+                    loadingVisible(false)
                 }
-                initBotonDescarga()
                 writeInPreferences()
-
-
             }
         }
+    }
+
+    private fun loadingVisible(visible : Boolean) {
+        binding.pbLoading.visibility = if (visible) View.VISIBLE else View.GONE
+        binding.bDescarga.visibility = if (!visible) View.VISIBLE else View.GONE
+
     }
 
     private fun actualizarAdapter(listaPokemon : ListaPokemon){
@@ -67,7 +74,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun writeInPreferences() {
         getPreferences(Context.MODE_PRIVATE).edit().apply {
-            //println(this@MainActivity.listaPokemon.toJson())
             putString(tagListaPokemon, this@MainActivity.listaPokemon.toJson())
             apply()
         }

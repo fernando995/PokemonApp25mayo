@@ -49,6 +49,44 @@ data class Pokemon (
         result+="\n"
         return result
     }
+
+    fun obtenerImagenTipo1(): Int? {
+        if (types.isEmpty()) return null
+        return getResource(types[0].type.name)
+    }
+
+    fun obtenerImagenTipo2(): Int? {
+        if (types.isEmpty() || types.size == 1) return null
+        return getResource(types[1].type.name)
+    }
+
+    private fun getResource(type: String): Int {
+        return when {
+            type.contentEquals("normal") -> R.mipmap.ic_normal
+            type.contentEquals("fighting") -> R.mipmap.ic_lucha
+            type.contentEquals("flying") -> R.mipmap.ic_volador
+            type.contentEquals("poison") -> R.mipmap.ic_veneno
+            type.contentEquals("ground") -> R.mipmap.ic_tierra
+            type.contentEquals("rock") -> R.mipmap.ic_piedra
+            type.contentEquals("bug") -> R.mipmap.ic_bicho
+            type.contentEquals("ghost") -> R.mipmap.ic_fantasma
+            type.contentEquals("steel") -> R.mipmap.ic_acero
+            type.contentEquals("fire") -> R.mipmap.ic_fuego
+            type.contentEquals("water") -> R.mipmap.ic_agua
+            type.contentEquals("grass") -> R.mipmap.ic_planta
+            type.contentEquals("electric") -> R.mipmap.ic_electrico
+            type.contentEquals("psychic") -> R.mipmap.ic_psiquico
+            type.contentEquals("ice") -> R.mipmap.ic_hielo
+            type.contentEquals("dragon") -> R.mipmap.ic_dragon
+            type.contentEquals("dark") -> R.mipmap.ic_oscuro
+            type.contentEquals("fairy") -> R.mipmap.ic_hada
+            type.contentEquals("unknown") -> R.mipmap.ic_desconocido
+            type.contentEquals("shadow") -> R.mipmap.ic_sombra
+
+            else -> R.mipmap.ic_desconocido
+
+        }
+    }
 }
 
 @Serializable
