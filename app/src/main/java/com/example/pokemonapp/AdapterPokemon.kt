@@ -1,10 +1,14 @@
 package com.example.pokemonapp
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokemonapp.databinding.ItemPokemonBinding
+import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 
 class AdapterPokemon : RecyclerView.Adapter<AdapterPokemon.PokemonViewHolder>() {
@@ -20,8 +24,7 @@ class AdapterPokemon : RecyclerView.Adapter<AdapterPokemon.PokemonViewHolder>() 
 
     override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
         val pokemon = pokemons.listaPokemon[position]
-        val nameCapitalized = "${pokemon.name[0].uppercase()}${pokemon.name.drop(1)}"
-        holder.pokemonBinding.tvPokemon.text = nameCapitalized
+        holder.pokemonBinding.tvPokemon.text = pokemon.nameCapitalized()
         Picasso.get().load(pokemon.sprites.frontDefault).into(holder.pokemonBinding.ivPokemon)
         val image1 = pokemon.obtenerImagenTipo1()
         if (image1 != null)
@@ -34,6 +37,12 @@ class AdapterPokemon : RecyclerView.Adapter<AdapterPokemon.PokemonViewHolder>() 
         else
             holder.pokemonBinding.ivTipo2.setImageDrawable(null)
 
+        holder.pokemonBinding.root.setOnClickListener {
+            val snack = Snackbar.make(holder.pokemonBinding.root, pokemon.nameCapitalized(), Snackbar.LENGTH_LONG)
+            snack.view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).textAlignment = View.TEXT_ALIGNMENT_CENTER
+            snack.show()
+            abrirPokemonActivity(pokemon, holder.pokemonBinding.root.context)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -43,5 +52,11 @@ class AdapterPokemon : RecyclerView.Adapter<AdapterPokemon.PokemonViewHolder>() 
     fun actualizarLista(listaPokemon: ListaPokemon) {
         pokemons = listaPokemon
         notifyDataSetChanged()
+    }
+
+    private fun abrirPokemonActivity(pokemon: Pokemon, context: Context) {
+        val intent = Intent(context, PokemonActivity::class.java)
+        intent.putExtra("Pokemon", pokemon.toJson())
+        context.startActivity(intent)
     }
 }
