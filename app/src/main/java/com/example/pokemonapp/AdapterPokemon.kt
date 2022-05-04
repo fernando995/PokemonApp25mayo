@@ -38,10 +38,7 @@ class AdapterPokemon : RecyclerView.Adapter<AdapterPokemon.PokemonViewHolder>() 
             holder.pokemonBinding.ivTipo2.setImageDrawable(null)
 
         holder.pokemonBinding.root.setOnClickListener {
-            val snack = Snackbar.make(holder.pokemonBinding.root, pokemon.nameCapitalized(), Snackbar.LENGTH_LONG)
-            snack.view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).textAlignment = View.TEXT_ALIGNMENT_CENTER
-            snack.show()
-            abrirPokemonActivity(pokemon, holder.pokemonBinding.root.context)
+            PokemonActivity.start(pokemon, holder.pokemonBinding.root.context)
         }
     }
 
@@ -54,9 +51,5 @@ class AdapterPokemon : RecyclerView.Adapter<AdapterPokemon.PokemonViewHolder>() 
         notifyDataSetChanged()
     }
 
-    private fun abrirPokemonActivity(pokemon: Pokemon, context: Context) {
-        val intent = Intent(context, PokemonActivity::class.java)
-        intent.putExtra("Pokemon", pokemon.toJson())
-        context.startActivity(intent)
-    }
+
 }
