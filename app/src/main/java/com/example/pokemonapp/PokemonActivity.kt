@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.example.pokemonapp.databinding.ActivityPokemonBinding
 
 class PokemonActivity : AppCompatActivity() {
@@ -28,6 +29,9 @@ class PokemonActivity : AppCompatActivity() {
         if (pokemonJson != null) {
             val pokemon = Pokemon.fromJson(pokemonJson)
             binding.tvPokemonNombre.text = pokemon.nameCapitalized()
+        } else {
+            Toast.makeText(this, "No se ha recibido ningún Pokémon", Toast.LENGTH_LONG).show()
+            finish()
         }
     }
 }
