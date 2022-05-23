@@ -52,6 +52,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@mipmap/pokeazul" />
 
+
     <TextView
         android:id="@+id/AlturaPokemon"
         android:layout_width="wrap_content"
