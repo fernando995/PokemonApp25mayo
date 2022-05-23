@@ -3,6 +3,8 @@ package com.example.pokemonapp
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.Serializable
+import java.util.*
+
 
 
 @Serializable
@@ -39,7 +41,9 @@ data class Pokemon (
     val sprites: Sprites,
     val stats: List<Stat>,
     val types: List<Type>,
-    val weight: Long
+    val weight: Long,
+    var vidaMax: Int,
+    var vidaRestante: Int,
 ) {
     fun nameCapitalized() = "${name[0].uppercase()}${name.drop(1)}"
 
@@ -78,6 +82,11 @@ data class Pokemon (
     fun obtenerImagenTipo2(): Int? {
         if (types.isEmpty() || types.size == 1) return null
         return getResource(types[1].type.name)
+    }
+
+    fun iniciarVida() {
+        vidaMax = (150..251).random()
+        vidaRestante = (1..vidaMax).random()
     }
 
     private fun getResource(type: String): Int {
@@ -411,3 +420,4 @@ data class Type (
     val slot: Long,
     val type: Species
 )
+
