@@ -16,6 +16,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySeleccionBinding
     private lateinit var listaPokemon: ListaPokemon
 
+    val sharedPreferences = getSharedPreferences("Prefs", Context.MODE_PRIVATE)
+    val text = sharedPreferences.getString("TAG", "No había nada")
+
+
     private val tagListaPokemon = "TAG_LISTA_POKEMON"
 
     override fun onCreate(savedInstanceState: Bundle?) {
